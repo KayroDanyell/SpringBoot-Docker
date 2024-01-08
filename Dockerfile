@@ -1,4 +1,4 @@
-FROM amazoncorretto:17
+FROM maven:3.8.5-openjdk-17
 
 WORKDIR /app
 
@@ -8,8 +8,5 @@ COPY . /app
 
 EXPOSE 8080
 
-ARG JAR_FILE=target/microservice-0.0.1.jar
-ADD ${JAR_FILE} microservice-0.0.1.jar
-
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
-ENTRYPOINT ["java","-jar","microservice-0.0.1.jar","--spring.config.location=./src/main/resources/application.properties"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"] #debugging purposes
+ENTRYPOINT ["mvn", "clean", "spring-boot:run"]
